@@ -14,8 +14,8 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
+you choose to sit in??
 
 ## Now with ggplot - first select the basic data
 
@@ -49,6 +49,26 @@ The data shows that people who sit in the back are drinking 3 times greater than
 
 ## Inferential Tests
 
+# Inferential
+
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+  
+The p-value is 0.000116 which is very small that the probability of all three rows are the same is small.
+
+
+## When significant follow up with TukeyHSD  
+
+```{r}
+plot(TukeyHSD(model1))
+```
+   
+The TukeyHSD plot shows that the people in the back way more than the people in the front while the middle row shows that the people drink less than the people in the back and more than the front people. The middle to front rows shows no evidence on average alcohol consumption. 
+
+
 ## Conclusions
-
-
+  
+Based on the evidence we can conclude that their is a difference on the alcohol consumption in between the rows that people sit. We can see that the people in the back drink 3 times more than the people in the front. 
